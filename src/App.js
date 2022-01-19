@@ -53,13 +53,11 @@ class App extends Component {
   }
   limparTela(){
     this.setState({
-      ...this.state,
       operacao:false,
       valorTela:"",
       resultado:0,
       acumulador: 0,
       })
-      return
   }
   operar(oper){
     if (oper=='bs'){
@@ -97,7 +95,7 @@ class App extends Component {
        <h3>Calculadora Academia Accenture</h3>
        {this.Tela(this.state.valorTela, this.state.resultado)}
        <div className='botoes'>
-         {this.Botao('AC',this.limparTela)}
+         {this.Botao('AC',()=>this.limparTela())}
          {this.Botao('(',()=>this.addDigitalTela('('))}
          {this.Botao(')',()=>this.addDigitalTela(')'))}
          {this.Botao('/',()=>this.addDigitalTela('/'))}
