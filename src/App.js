@@ -11,10 +11,8 @@ class App extends Component {
       acumulador: 0,
       operacao: false,
     }
-
-    
   }
-
+//Subcomponentes
   Tela(valor, res){
     return(
       <div className='tela'>
@@ -29,6 +27,7 @@ class App extends Component {
     )
   
   }
+  //Funções
   addDigitalTela(digito){
     if ((digito=='+' || digito=='-' || digito=='*' || digito=='/') && this.state.operacao) {
       this.setState({

@@ -4,7 +4,7 @@
   padding-right: 20px;
   justify-content: center;
   align-items: flex-start;
-  background-color: #444 ;
+  background-color: #47126b;
   flex-direction: column;
   width: 260px;
 }
@@ -25,9 +25,9 @@
   height: 75px;
   width: 75px;
   padding: 20px;
-  background-color: black;
+  background-color:#571089;
   color: #fff;
-  border-color: black;
+  border-color: #822faf;
   text-align: center;
   outline: none;
 }
@@ -38,8 +38,14 @@
   align-items: center;
   flex-direction: column;
   width: 300px;
-  border: 1px solid black;
+  border: 1px solid #822faf;
+  background-color: #571089;
   }
+
+  .container h3{
+    color: #fff;
+  }
+
 
   .botoes{
     flex-direction: row;
