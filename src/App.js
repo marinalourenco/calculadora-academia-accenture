@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './main.css';
+import * as S from './styled';
 import Botao from './components/Botao';
 import Tela from './components/Tela';
 
@@ -8,8 +8,6 @@ function App() {
   const [resultado, setResultado] = useState(0);
   const [acumulador, setAcumulador] = useState(0);
   const [operacao, setOperacao] = useState(false);
-
-  
   
   function limparTela(){
     setOperacao(false)
@@ -19,7 +17,7 @@ function App() {
   }
 
   function addDigitalTela(digito){
-    if ((digito=='+'|| digito=='-' || digito=='*' || digito=='/' ) && operacao) {
+    if ((digito==='+'|| digito==='-' || digito==='*' || digito==='/' ) && operacao) {
       setOperacao (false)
       valorTela(resultado+digito)
       return
@@ -36,7 +34,7 @@ function App() {
   }
 
   function operar(oper){
-    if (oper=='bs'){
+    if (oper==='bs'){
       let verTela = valorTela
       verTela=verTela.substring(
         0,(verTela.length-1)
@@ -53,14 +51,12 @@ function App() {
     } catch (error) {
       setResultado('ERROR')
     }
-
-
   }
   return (
-    <div className='container'>
-       <h3>Calculadora Academia Accenture</h3>
+    <S.Container>
+       <S.Titulo>Calculadora Academia Accenture</S.Titulo>
        {Tela(valorTela, resultado)}
-       <div className='botoes'>
+       <S.GridBotoes>
          {Botao('AC',()=>limparTela())}
          {Botao('(',()=>addDigitalTela('('))}
          {Botao(')',()=>addDigitalTela(')'))}
@@ -81,9 +77,8 @@ function App() {
          {Botao('.',()=>addDigitalTela('.'))}
          {Botao('C',()=>operar('bs'))}
          {Botao('=',()=>operar('='))}
-
-       </div>
-      </div>
+       </S.GridBotoes>
+    </S.Container>
   )
 }
 
