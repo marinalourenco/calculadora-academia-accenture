@@ -1,128 +1,90 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './main.css';
+import Botao from './components/Botao';
+import Tela from './components/Tela';
 
+function App() {
+  const [valorTela, setValorTela] = useState("");
+  const [resultado, setResultado] = useState(0);
+  const [acumulador, setAcumulador] = useState(0);
+  const [operacao, setOperacao] = useState(false);
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = { 
-      valorTela:"",
-      resultado: 0,
-      acumulador: 0,
-      operacao: false,
-    }
-  }
-//Subcomponentes
-  Tela(valor, res){
-    return(
-      <div className='tela'>
-        <span className='tela-operacao'>{valor}</span>
-        <span className='tela-resultado'>{res}</span>
-      </div>
-    )
-  }
-  Botao(label,onClick){
-    return(
-      <button className='botao' onClick={onClick}>{label}</button>
-    )
   
+  
+  function limparTela(){
+    setOperacao(false)
+    setValorTela("")
+    setResultado(0)
+    setAcumulador(0)
   }
-  //Funções
-  addDigitalTela(digito){
-    if ((digito=='+' || digito=='-' || digito=='*' || digito=='/') && this.state.operacao) {
-      this.setState({
-        ...this.state,
-        operacao:false,
-        valorTela: this.state.resultado + digito
-      })
+
+  function addDigitalTela(digito){
+    if ((digito=='+'|| digito=='-' || digito=='*' || digito=='/' ) && operacao) {
+      setOperacao (false)
+      valorTela(resultado+digito)
       return
     }
-    if (this.state.operacao) {
-      this.setState({
-        ...this.state,
-        operacao:false,
-        valorTela: digito
-      })
-      return
+
+    if(operacao){
+      setOperacao (false)
+      valorTela(digito)
+        return
     }
-    this.setState({
-      ...this.state,
-      valorTela: this.state.valorTela + digito
-    })
-    return
+      setValorTela(valorTela+digito)
+      return
+
   }
-  limparTela(){
-    this.setState({
-      operacao:false,
-      valorTela:"",
-      resultado:0,
-      acumulador: 0,
-      })
-  }
-  operar(oper){
+
+  function operar(oper){
     if (oper=='bs'){
-      let verTela=this.state.valorTela
+      let verTela = valorTela
       verTela=verTela.substring(
         0,(verTela.length-1)
       )
-      this.setState({
-        ...this.state,
-        valorTela: verTela,
-        operacao: false,
-        })
-    return
+      setValorTela(verTela)
+      setOperacao(false)
+      return
     }
     try {
-      const r=eval(this.state.valorTela)
-      this.setState({
-        ...this.state,
-        acumulador:r,
-        resultado:r,
-        operacao:true,
-        }
-      )
+      const r=eval(valorTela)
+      setAcumulador(r)
+      setResultado(r)
+      setOperacao(true)
     } catch (error) {
-      this.setState({
-        ...this.state,
-        resultado:'ERROR'
-      })
-    
+      setResultado('ERROR')
     }
+
+
   }
-  render() {
-    return (
-      <div className='container'>
+  return (
+    <div className='container'>
        <h3>Calculadora Academia Accenture</h3>
-       {this.Tela(this.state.valorTela, this.state.resultado)}
+       {Tela(valorTela, resultado)}
        <div className='botoes'>
-         {this.Botao('AC',()=>this.limparTela())}
-         {this.Botao('(',()=>this.addDigitalTela('('))}
-         {this.Botao(')',()=>this.addDigitalTela(')'))}
-         {this.Botao('/',()=>this.addDigitalTela('/'))}
-         {this.Botao('7',()=>this.addDigitalTela('7'))}
-         {this.Botao('8',()=>this.addDigitalTela('8'))}
-         {this.Botao('9',()=>this.addDigitalTela('9'))}
-         {this.Botao('*',()=>this.addDigitalTela('*'))}
-         {this.Botao('4',()=>this.addDigitalTela('4'))}
-         {this.Botao('5',()=>this.addDigitalTela('5'))}
-         {this.Botao('6',()=>this.addDigitalTela('6'))}
-         {this.Botao('-',()=>this.addDigitalTela('-'))}
-         {this.Botao('1',()=>this.addDigitalTela('1'))}
-         {this.Botao('2',()=>this.addDigitalTela('2'))}
-         {this.Botao('3',()=>this.addDigitalTela('3'))}
-         {this.Botao('+',()=>this.addDigitalTela('+'))}
-         {this.Botao('0',()=>this.addDigitalTela('0'))}
-         {this.Botao('.',()=>this.addDigitalTela('.'))}
-         {this.Botao('C',()=>this.operar('bs'))}
-         {this.Botao('=',()=>this.operar('='))}
+         {Botao('AC',()=>limparTela())}
+         {Botao('(',()=>addDigitalTela('('))}
+         {Botao(')',()=>addDigitalTela(')'))}
+         {Botao('/',()=>addDigitalTela('/'))}
+         {Botao('7',()=>addDigitalTela('7'))}
+         {Botao('8',()=>addDigitalTela('8'))}
+         {Botao('9',()=>addDigitalTela('9'))}
+         {Botao('*',()=>addDigitalTela('*'))}
+         {Botao('4',()=>addDigitalTela('4'))}
+         {Botao('5',()=>addDigitalTela('5'))}
+         {Botao('6',()=>addDigitalTela('6'))}
+         {Botao('-',()=>addDigitalTela('-'))}
+         {Botao('1',()=>addDigitalTela('1'))}
+         {Botao('2',()=>addDigitalTela('2'))}
+         {Botao('3',()=>addDigitalTela('3'))}
+         {Botao('+',()=>addDigitalTela('+'))}
+         {Botao('0',()=>addDigitalTela('0'))}
+         {Botao('.',()=>addDigitalTela('.'))}
+         {Botao('C',()=>operar('bs'))}
+         {Botao('=',()=>operar('='))}
 
        </div>
       </div>
-
-      
-    );
-  }
-
+  )
 }
 
 export default App;
