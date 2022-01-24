@@ -75,7 +75,7 @@ function App() {
          {Botao('+',()=>addDigitalTela('+'))}
          {Botao('0',()=>addDigitalTela('0'))}
          {Botao('.',()=>addDigitalTela('.'))}
-         {Botao('C',()=>operar('bs'))}
+         {Botao('Del',()=>operar('bs'))}
          {Botao('=',()=>operar('='))}
        </S.GridBotoes>
     </S.Container>
